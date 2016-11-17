@@ -1,0 +1,14 @@
+body, html {
+  height: 100%;
+  background: #ececec;
+  margin: 0;
+}
+
+body {
+  font-family: Lora, serif;
+  color: #091F2F;
+}
+
+a {
+  color: #288BE4;
+}
