@@ -7,9 +7,9 @@
     <div class='container'>
       <div class="main">
         <div class='columns'>
-          <Notice :notice="column_one"></Notice>
-          <Notice :notice="column_two"></Notice>
-          <Notice :notice="column_three"></Notice>
+          <Notice :notice="column_one" :column="one"></Notice>
+          <Notice :notice="column_two" :column="two"></Notice>
+          <Notice :notice="column_three" :column="three"></Notice>
         </div>
         <div class="countdown">Next page in <span class="cursor">:</span>{{time}}</div>
       </div>
@@ -41,6 +41,10 @@ export default {
       seconds: 5,
       initialized: false,
       notices: [],
+      notice_counter: 0,
+      one: 'column_one',
+      two: 'column_two',
+      three: 'column_three',
       column_one: {},
       column_two: {},
       column_three: {}
@@ -48,18 +52,37 @@ export default {
   },
 
   methods: {
+    addColumnNotice: function (column) {
+      let self = this
+
+      if (!self.notices[self.notice_counter]) {
+        self.notice_counter = 0
+      }
+
+      self[column] = self.notices[self.notice_counter]
+
+      self.notice_counter++
+    },
+
     initialized: function () {
       // Setup the first columns
       this.$el.classList.add('is-ready')
-
-      // Setup the first columns
-      this.column_one = this.notices[1]
 
       // Set to initialized
       this.initialized = true
 
       // Start the clock
       this.startTheClock()
+
+      // Add notices to columns
+      this.addColumnNotice('column_one')
+      this.addColumnNotice('column_two')
+      this.addColumnNotice('column_three')
+
+      // Listen for the switch notice event
+      window.kyle.$on('switch_notice', function (data) {
+        console.log(data)
+      })
     },
 
     startTheClock: function () {

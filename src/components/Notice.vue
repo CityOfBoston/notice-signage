@@ -32,7 +32,7 @@
       </ul>
     </div>
     <div class="notice-testimony"  v-if="notice.testimony_time">Public testimony begins at <span v-html="notice.testimony_time"></span></div>
-    <NoticeBody :id="notice.id" :body="notice.body" :drawers="notice.field_drawer"></NoticeBody>
+    <NoticeBody :id="notice.id" :body="notice.body" :drawers="notice.field_drawer" :column="column"></NoticeBody>
   </div>
 </template>
 
@@ -110,7 +110,7 @@ import NoticeBody from './NoticeBody'
 
 export default {
   name: 'notice',
-  props: ['notice'],
+  props: ['notice', 'column'],
   components: {
     NoticeBody
   }

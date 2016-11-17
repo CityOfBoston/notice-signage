@@ -91,7 +91,7 @@ export default {
       content_height: 0
     }
   },
-  props: ['body', 'drawers', 'id'],
+  props: ['body', 'drawers', 'id', 'column'],
   created: function () {
     // Scroll pages
     window.kyle.$on('change_page', this.change_page)
@@ -107,7 +107,7 @@ export default {
       let scroll = 0
 
       if (pageCount === pageNumber) {
-        console.log('Switch!')
+        window.kyle.$emit('switch_notice', {column: this.column})
       } else {
         scroll = ((pageNumber * this.body_height) * -1) + 25
         scroll = scroll + 'px'
