@@ -5,10 +5,13 @@
       <LastUpdated></LastUpdated>
     </div>
     <div class='container'>
-      <div class='columns'>
-        <Notice :notice="column_one"></Notice>
-        <Notice :notice="column_two"></Notice>
-        <Notice :notice="column_three"></Notice>
+      <div class="main">
+        <div class='columns'>
+          <Notice :notice="column_one"></Notice>
+          <Notice :notice="column_two"></Notice>
+          <Notice :notice="column_three"></Notice>
+        </div>
+        <div class="countdown">Next page in <span class="cursor">:</span>{{time}}</div>
       </div>
       <div class='column sidebar'>
         <NoticeList :notices="notices"></NoticeList>
@@ -33,6 +36,7 @@ export default {
 
   data: function () {
     return {
+      time: null,
       clock: false,
       seconds: 5,
       initialized: false,
@@ -49,9 +53,7 @@ export default {
       this.$el.classList.add('is-ready')
 
       // Setup the first columns
-      this.column_one = this.notices[0]
-      this.column_two = this.notices[1]
-      this.column_three = this.notices[1]
+      this.column_one = this.notices[1]
 
       // Set to initialized
       this.initialized = true
@@ -65,12 +67,16 @@ export default {
         // Setup the timer
         var seconds = this.seconds
         var time = seconds
+        var self = this
 
         // Start the counter
         setInterval(function () {
+          // Set the time
+          self.time = time
+
           if (time === 0) {
             time = seconds
-            console.log('PARTY!!!!')
+            window.kyle.$emit('change_page')
           } else {
             time--
           }
@@ -93,7 +99,7 @@ export default {
 
         // If not initialized, then initialize
         if (this.initialized !== true) {
-          this.$emit('initialized')
+          window.kyle.$emit('initialized')
         }
       }, (response) => {
         setTimeout(this.updateData, 2000)
@@ -103,7 +109,7 @@ export default {
 
   created: function () {
     this.updateData()
-    this.$on('initialized', this.initialized)
+    window.kyle.$on('initialized', this.initialized)
   }
 }
 </script>
@@ -138,11 +144,20 @@ h1 {
   flex-direction: row;
 }
 
-.columns {
+.main {
   flex: 0.65;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.columns {
   display: flex;
   flex-direction: row;
-  padding: 1em;
+}
+
+.countdown {
+  padding-top: 0.875rem;
 }
 
 .sidebar {
