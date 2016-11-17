@@ -2,7 +2,7 @@
   <li class="notice-item" v-on:click="toggleClass" v-bind:class="{ active: active }">
     <div class="notice-item-container">
       <div class="notice-info">
-        <div class="notice-title" v-html="notice.title"></div>
+        <div class="notice-title notice-oneline" v-html="notice.title"></div>
         <div class="notice-location">{{notice.location_street}}<span v-if="notice.location_room">, {{notice.location_room}}</span></div>
       </div>
       <div class="notice-datetime">
@@ -68,12 +68,17 @@
     margin-bottom: 0.25rem;
   }
 
-  .notice-title a {
+  .notice-oneline,
+  .notice-oneline a {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     max-width: 250px;
     display: block;
+    text-decoration: none;
+  }
+
+  .notice-title a {
     text-decoration: none;
   }
 </style>

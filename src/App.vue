@@ -6,15 +6,9 @@
     </div>
     <div class='container'>
       <div class='columns'>
-        <div class='column column-one'>
-          <Notice :notice="column_one"></Notice>
-        </div>
-        <div class='column column-two'>
-          <Notice :notice="column_two"></Notice>
-        </div>
-        <div class='column column-three'>
-          <Notice :notice="column_three"></Notice>
-        </div>
+        <Notice :notice="column_one"></Notice>
+        <Notice :notice="column_two"></Notice>
+        <Notice :notice="column_three"></Notice>
       </div>
       <div class='column sidebar'>
         <NoticeList :notices="notices"></NoticeList>
@@ -39,6 +33,8 @@ export default {
 
   data: function () {
     return {
+      clock: false,
+      seconds: 5,
       initialized: false,
       notices: [],
       column_one: {},
@@ -55,9 +51,36 @@ export default {
       // Setup the first columns
       this.column_one = this.notices[0]
       this.column_two = this.notices[1]
+      this.column_three = this.notices[1]
 
       // Set to initialized
       this.initialized = true
+
+      // Start the clock
+      this.startTheClock()
+    },
+
+    startTheClock: function () {
+      if (this.clock !== true) {
+        // Setup the timer
+        var seconds = this.seconds
+        var time = seconds
+
+        // Start the counter
+        setInterval(function () {
+          if (time === 0) {
+            time = seconds
+            console.log('PARTY!!!!')
+          } else {
+            time--
+          }
+        }, 1000)
+
+        // The clock is running
+        this.clock = true
+      } else {
+        console.log('Clock is running. OMG!')
+      }
     },
 
     updateData: function () {
@@ -120,18 +143,6 @@ h1 {
   display: flex;
   flex-direction: row;
   padding: 1em;
-}
-
-.column {
-  flex: 0.33;
-  background: #ffffff;
-  padding: 1.5em;
-  display: flex;
-  flex-direction: column;
-}
-
-.column:not(:first-child) {
-  margin-left: 1em;
 }
 
 .sidebar {
