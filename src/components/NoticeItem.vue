@@ -1,5 +1,6 @@
 <template>
-  <li class="notice-item" v-on:click="toggleClass" v-bind:class="{ active: active }">
+  <li class="notice-item" v-bind:class="{ active: active }">
+    <div class="notice-column" v-if="active">{{column}}</div>
     <div class="notice-item-container">
       <div class="notice-info">
         <div class="notice-title notice-oneline" v-html="notice.title"></div>
@@ -86,16 +87,31 @@
 <script>
 export default {
   name: 'notice_item',
+  props: ['notice'],
   data: function () {
     return {
-      active: false
+      active: false,
+      column: false
     }
+  },
+  created: function () {
+    window.kyle.$on('notice_active', this.checkIfActive)
+    window.kyle.$on('notice_inactive', this.inactiveNotice)
   },
   methods: {
-    toggleClass: function () {
-      this.active = !this.active
+    checkIfActive: function (data) {
+      if (data.id === this.notice.id) {
+        this.active = true
+        this.column = data.column
+      }
+    },
+
+    inactiveNotice: function (data) {
+      if (data.id === this.notice.id) {
+        this.active = false
+        this.column = false
+      }
     }
-  },
-  props: ['notice']
+  }
 }
 </script>

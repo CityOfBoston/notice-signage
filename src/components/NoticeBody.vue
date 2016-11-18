@@ -11,7 +11,7 @@
       </div>
     </div>
     <div class="notice-meta">
-      <div class="notice-pages">1 of {{page_count}}</div>
+      <div class="notice-pages">{{page_number}} of {{page_count}}</div>
       <div class="notice-url">boston.gov/public-notices/{{id}}</div>
     </div>
   </div>
@@ -106,7 +106,8 @@ export default {
       let pageNumber = this.page_number
       let scroll = 0
 
-      if (pageCount === pageNumber) {
+      if (pageNumber >= pageCount) {
+        window.kyle.$emit('notice_inactive', {id: this.id})
         window.kyle.$emit('switch_notice', {column: this.column})
       } else {
         scroll = ((pageNumber * this.body_height) * -1) + 25

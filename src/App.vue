@@ -14,7 +14,7 @@
         <div class="countdown">Next page in <span class="cursor">:</span>{{time}}</div>
       </div>
       <div class='column sidebar'>
-        <NoticeList :notices="notices"></NoticeList>
+        <NoticeList :notices="notices" ref="noticeList"></NoticeList>
       </div>
     </div>
   </div>
@@ -38,7 +38,7 @@ export default {
     return {
       time: null,
       clock: false,
-      seconds: 5,
+      seconds: 2,
       initialized: false,
       notices: [],
       notice_counter: 0,
@@ -55,33 +55,64 @@ export default {
     addColumnNotice: function (column) {
       let self = this
 
+      // If there are no more notices, start over
       if (!self.notices[self.notice_counter]) {
         self.notice_counter = 0
       }
 
-      self[column] = self.notices[self.notice_counter]
+      let notice = self.notices[self.notice_counter]
+
+      self[column] = notice
+
+      // Tell the world that this notice is on the clock
+      window.kyle.$emit('notice_active', {
+        id: notice.id,
+        column: self.getColumn(column)
+      })
 
       self.notice_counter++
     },
 
+    getColumn: function (column) {
+      let slot = false
+
+      switch (column) {
+        case 'column_one':
+          slot = 'A'
+          break
+        case 'column_two':
+          slot = 'B'
+          break
+        case 'column_three':
+          slot = 'C'
+          break
+        default:
+          slot = false
+      }
+
+      return slot
+    },
+
     initialized: function () {
+      let self = this
+
       // Setup the first columns
-      this.$el.classList.add('is-ready')
+      self.$el.classList.add('is-ready')
 
       // Set to initialized
-      this.initialized = true
+      self.initialized = true
 
       // Start the clock
-      this.startTheClock()
+      self.startTheClock()
 
       // Add notices to columns
-      this.addColumnNotice('column_one')
-      this.addColumnNotice('column_two')
-      this.addColumnNotice('column_three')
+      self.addColumnNotice('column_one')
+      self.addColumnNotice('column_two')
+      self.addColumnNotice('column_three')
 
       // Listen for the switch notice event
       window.kyle.$on('switch_notice', function (data) {
-        console.log(data)
+        self.addColumnNotice(data.column)
       })
     },
 
