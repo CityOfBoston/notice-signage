@@ -105,11 +105,6 @@ export default {
       // Start the clock
       self.startTheClock()
 
-      // Add notices to columns
-      self.addColumnNotice('column_one')
-      self.addColumnNotice('column_two')
-      self.addColumnNotice('column_three')
-
       // Listen for the switch notice event
       window.kyle.$on('switch_notice', function (data) {
         self.addColumnNotice(data.column)
@@ -208,6 +203,7 @@ h1 {
 .columns {
   display: flex;
   flex-direction: row;
+  flex: 1;
 }
 
 .countdown {

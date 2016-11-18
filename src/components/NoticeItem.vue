@@ -1,14 +1,17 @@
 <template>
   <li class="notice-item" v-bind:class="{ active: active }">
-    <div class="notice-column" v-if="active">{{column}}</div>
     <div class="notice-item-container">
+      <div class="notice-column" v-if="active"><span>{{column}}</span></div>
       <div class="notice-info">
         <div class="notice-title notice-oneline" v-html="notice.title"></div>
         <div class="notice-location">{{notice.location_street}}<span v-if="notice.location_room">, {{notice.location_room}}</span></div>
       </div>
-      <div class="notice-datetime">
+      <div class="notice-datetime" v-if="notice.canceled !== '1'">
         <div class="notice-date" v-html="notice.notice_date"></div>
         <div class="notice-time" v-html="notice.notice_time"></div>
+      </div>
+      <div class="notice-datetime" v-else>
+        <div class="notice-canceled">Canceled</div>
       </div>
     </div>
   </li>
@@ -17,13 +20,36 @@
 <style>
   .notice-item {
     margin: 0;
-    padding: 0 2rem;
+    padding: 0 10%;
     list-style: none;
     font-size: 1.125rem;
+    transition: all 0.25s ease-in;
+    position: relative;
+  }
+
+  .notice-canceled {
+    text-transform: uppercase;
+    color: #FB4D42;
+    font-family: Montserrat;
+    font-style: normal;
   }
 
   .notice-item.active {
     background-color: #dedede
+  }
+
+  .notice-column {
+    position: absolute;
+    margin-left: -40px;
+    height: 31px;
+    width: 31px;
+    border: 2px solid #091F2F;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    font-family: Montserrat;
+    font-weight: bold;
   }
 
   .notice-item.active .notice-date,
