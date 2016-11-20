@@ -1,7 +1,10 @@
 <template>
   <div class="notice">
     <div class="notice-header">
-      <div class="notice-title" v-html="notice.title"></div>
+      <div class="notice-title-container">
+        <div class="notice-column"><span>{{column_name}}</span></div>
+        <div class="notice-title" v-html="notice.title"></div>
+      </div>
       <ul class="notice-details">
         <li class="notice-detail" v-if="notice.canceled !== '1'">
           <div class="notice-detail-header">When</div>
@@ -59,6 +62,16 @@
   margin-bottom: 0.875rem;
 }
 
+.notice-title-container {
+  border-bottom: 4px solid #091F2F;
+  padding-bottom: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.notice-column {
+  float: left;
+}
+
 .notice-title {
   font-size: 1.5625rem;
   line-height: 1.1;
@@ -67,9 +80,9 @@
   overflow: visible;
   word-wrap: normal;
   white-space: normal;
-  border-bottom: 4px solid #091F2F;
-  padding-bottom: 0.75rem;
-  margin-bottom: 0.75rem;
+  margin-left: 43px;
+  padding-top: 4px;
+  min-height: 1.5625rem;
 }
 
 .notice:not(:first-child) {
@@ -113,6 +126,18 @@ export default {
   props: ['notice', 'column'],
   components: {
     NoticeBody
+  },
+  computed: {
+    column_name: function () {
+      switch (this.column) {
+        case 'column_one':
+          return 'A'
+        case 'column_two':
+          return 'B'
+        case 'column_three':
+          return 'C'
+      }
+    }
   }
 }
 </script>
