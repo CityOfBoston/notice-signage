@@ -54,14 +54,9 @@ export default {
   methods: {
     addColumnNotice: function (column) {
       let self = this
+      let notice = self.getNotice()
 
-      // If there are no more notices, start over
-      if (!self.notices[self.notice_counter]) {
-        self.notice_counter = 0
-      }
-
-      let notice = self.notices[self.notice_counter]
-
+      // Set the notice
       self[column] = notice
 
       // Tell the world that this notice is on the clock
@@ -91,6 +86,37 @@ export default {
       }
 
       return slot
+    },
+
+    // Returns the next non-active notive
+    getNotice: function () {
+      let self = this
+      let noticeListItems = self.$refs.noticeList.$children
+      let notice = false
+      let counter = self.notice_counter
+
+      // Just keep swimming
+      for (;;) {
+        // If there is not a notice, assume we're at the
+        // end, and start at 0
+        if (!self.notices[counter]) {
+          counter = 0
+        }
+
+        // Make sure it's not active
+        if (!noticeListItems[counter].active) {
+          notice = self.notices[counter]
+          break
+        // It's active, so move on
+        } else {
+          counter++
+        }
+      }
+
+      // Set the counter
+      self.notice_counter = counter++
+
+      return notice
     },
 
     initialized: function () {
@@ -194,7 +220,7 @@ h1 {
 }
 
 .main {
-  flex: 0.65;
+  width: 70%;
   padding: 1rem;
   display: flex;
   flex-direction: column;
@@ -211,9 +237,10 @@ h1 {
 }
 
 .sidebar {
-  flex: 0.35;
+  width: 30%;
   background-color: #ffffff;
   padding: 0;
+  overflow-x: scroll;
 }
 
 .column:not(:first-child).sidebar {
