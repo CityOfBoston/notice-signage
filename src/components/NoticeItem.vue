@@ -20,7 +20,7 @@
 <style>
   .notice-item {
     margin: 0;
-    padding: 0 10%;
+    padding: 0 5%;
     list-style: none;
     font-size: 1.125rem;
     transition: all 0.25s ease-in;
@@ -40,16 +40,20 @@
 
   .notice-column {
     position: absolute;
-    margin-left: -40px;
-    height: 31px;
-    width: 31px;
-    border: 2px solid #091F2F;
+    height: 33px;
+    width: 33px;
+    background: #FB4D42;
+    color: #ffffff;
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 50%;
     font-family: Montserrat;
     font-weight: bold;
+  }
+
+  .notice-column span {
+    margin-top: -2px;
   }
 
   .notice-item.active .notice-date,
@@ -68,6 +72,7 @@
   .notice-info {
     flex: 1;
     padding-right: 1em;
+    padding-left: 50px;
   }
 
   .notice-datetime {
