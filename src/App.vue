@@ -214,7 +214,7 @@ h1 {
   width: 30%;
   background-color: #ffffff;
   padding: 0;
-  overflow-x: scroll;
+  overflow: hidden;
 }
 
 .column:not(:first-child).sidebar {
