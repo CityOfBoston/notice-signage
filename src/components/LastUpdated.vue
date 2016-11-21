@@ -29,5 +29,6 @@ export default {
   .last-updated {
     color: #e8e8e8;
     margin-left: auto;
+    font-style: italic;
   }
 </style>

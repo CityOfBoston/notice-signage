@@ -177,7 +177,7 @@ export default {
 }
 
 .header {
-  background: #000000;
+  background: #091F2F;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -187,6 +187,8 @@ export default {
 h1 {
   margin: 0;
   color: #ffffff;
+  font-family: Montserrat;
+  text-transform: uppercase;
 }
 
 .container {
