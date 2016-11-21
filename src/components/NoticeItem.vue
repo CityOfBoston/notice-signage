@@ -23,7 +23,6 @@
     padding: 0 5%;
     list-style: none;
     font-size: 1.125rem;
-    transition: all 0.25s ease-in;
     position: relative;
   }
 
