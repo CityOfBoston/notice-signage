@@ -169,9 +169,6 @@ export default {
         // set data on vm
         this.notices = response.body
 
-        // Reschedule the data update
-        setTimeout(this.updateData, 2000)
-
         // If not initialized, then initialize
         if (this.initialized !== true) {
           window.kyle.$emit('initialized')
