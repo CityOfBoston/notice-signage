@@ -11,7 +11,7 @@
           <Notice :notice="column_two" :column="two"></Notice>
           <Notice :notice="column_three" :column="three"></Notice>
         </div>
-        <div class="countdown">Next page in <span class="cursor">:</span>{{time}}</div>
+        <Countdown></Countdown>
       </div>
       <div class='column sidebar'>
         <NoticeList :notices="notices" ref="noticeList"></NoticeList>
@@ -24,6 +24,7 @@
 import Notice from './components/Notice'
 import NoticeList from './components/NoticeList'
 import LastUpdated from './components/LastUpdated'
+import Countdown from './components/Countdown'
 
 export default {
   name: 'app',
@@ -31,14 +32,14 @@ export default {
   components: {
     NoticeList,
     LastUpdated,
-    Notice
+    Notice,
+    Countdown
   },
 
   data: function () {
     return {
       time: null,
       clock: false,
-      seconds: 2,
       initialized: false,
       notices: [],
       notice_counter: 0,
@@ -48,7 +49,7 @@ export default {
       column_one: {},
       column_two: {},
       column_three: {},
-      last_updated: false
+      last_updated: 'Updating...'
     }
   },
 
@@ -129,40 +130,10 @@ export default {
       // Set to initialized
       self.initialized = true
 
-      // Start the clock
-      self.startTheClock()
-
       // Listen for the switch notice event
       window.kyle.$on('switch_notice', function (data) {
         self.addColumnNotice(data.column)
       })
-    },
-
-    startTheClock: function () {
-      if (this.clock !== true) {
-        // Setup the timer
-        var seconds = this.seconds
-        var time = seconds
-        var self = this
-
-        // Start the counter
-        setInterval(function () {
-          // Set the time
-          self.time = time
-
-          if (time === 0) {
-            time = seconds
-            window.kyle.$emit('change_page')
-          } else {
-            time--
-          }
-        }, 1000)
-
-        // The clock is running
-        this.clock = true
-      } else {
-        console.log('Clock is running. OMG!')
-      }
     },
 
     updateData: function () {
@@ -235,10 +206,6 @@ h1 {
   display: flex;
   flex-direction: row;
   flex: 1;
-}
-
-.countdown {
-  padding-top: 0.875rem;
 }
 
 .sidebar {
