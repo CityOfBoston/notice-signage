@@ -38,7 +38,7 @@ export default {
     return {
       time: null,
       clock: false,
-      seconds: 2,
+      seconds: 60,
       initialized: false,
       notices: [],
       notice_counter: 0,
@@ -170,14 +170,14 @@ export default {
         this.notices = response.body
 
         // Reschedule the data update
-        setTimeout(this.updateData, 2000)
+        setTimeout(this.updateData, 65000)
 
         // If not initialized, then initialize
         if (this.initialized !== true) {
           window.kyle.$emit('initialized')
         }
       }, (response) => {
-        setTimeout(this.updateData, 2000)
+        setTimeout(this.updateData, 65000)
       })
     }
   },
