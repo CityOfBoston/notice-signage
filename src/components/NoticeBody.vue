@@ -107,6 +107,12 @@ export default {
       let scroll = 0
 
       if (pageNumber >= pageCount) {
+        // Reset the scroll
+        this.$refs.content.style.transform = 'translateY(0)'
+
+        // Set the page number back to 1
+        this.page_number = 1
+
         window.kyle.$emit('notice_inactive', {id: this.id})
         window.kyle.$emit('switch_notice', {column: this.column})
       } else {
