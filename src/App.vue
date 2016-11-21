@@ -151,9 +151,9 @@ export default {
         }
 
         // Set timer
-        setTimeout(this.updateData, 2000)
+        setTimeout(this.updateData, 120000)
       }, (response) => {
-        setTimeout(this.updateData, 2000)
+        setTimeout(this.updateData, 120000)
       })
     }
   },
