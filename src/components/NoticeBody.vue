@@ -54,6 +54,10 @@
   font-size: 0.875rem;
 }
 
+.notice-body-list li {
+  margin-left: 0.5rem;
+}
+
 .notice-body .paragraphs-items-field-links {
   margin-bottom: 0.875rem;
 }
