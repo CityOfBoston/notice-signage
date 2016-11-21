@@ -2,7 +2,7 @@
   <div id='app' class='app'>
     <div class='header'>
       <h1>City Clerk Postings</h1>
-      <LastUpdated></LastUpdated>
+      <LastUpdated :updated="last_updated"></LastUpdated>
     </div>
     <div class='container'>
       <div class="main">
@@ -47,7 +47,8 @@ export default {
       three: 'column_three',
       column_one: {},
       column_two: {},
-      column_three: {}
+      column_three: {},
+      last_updated: false
     }
   },
 
@@ -165,14 +166,21 @@ export default {
     },
 
     updateData: function () {
-      this.$http.get('https://www.boston.gov/api/v1/public-notices').then((response) => {
+      // this.$http.get('https://www.boston.gov/api/v1/public-notices').then((response) => {
+      this.$http.get('http://spyglass.dd:8083/api/v1/public-notices').then((response) => {
         // set data on vm
         this.notices = response.body
+
+        // set the last updated time
+        this.last_updated = Date.now()
 
         // If not initialized, then initialize
         if (this.initialized !== true) {
           window.kyle.$emit('initialized')
         }
+
+        // Set timer
+        setTimeout(this.updateData, 2000)
       }, (response) => {
         setTimeout(this.updateData, 2000)
       })
