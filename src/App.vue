@@ -46,9 +46,9 @@ export default {
       one: 'column_one',
       two: 'column_two',
       three: 'column_three',
-      column_one: {},
-      column_two: {},
-      column_three: {},
+      column_one: {title: 'Loading...'},
+      column_two: {title: 'Loading...'},
+      column_three: {title: 'Loading...'},
       last_updated: 'Updating...'
     }
   },

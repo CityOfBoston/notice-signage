@@ -1,7 +1,12 @@
 <template>
-  <div class="countdown">
-    <div v-if="show_time">Next page in <strong><span>:</span>{{ seconds_left }}</strong></div>
-    <div v-else>Updating...</div>
+  <div class="countdown-container">
+    <div class="countdown">
+      <div v-if="show_time">Next page in <strong><span>:</span>{{ seconds_left }}</strong></div>
+      <div v-else>Updating...</div>
+    </div>
+    <div class="view">
+      View all public notices at <strong>boston.gov/public-notices</strong>
+    </div>
   </div>
 </template>
 
@@ -14,7 +19,7 @@ export default {
   data () {
     return {
       seconds: 58,
-      seconds_left: 58,
+      seconds_left: 5,
       show_time: true,
       timeout: ''
     }
@@ -52,7 +57,14 @@ export default {
 </script>
 
 <style scoped>
-  .countdown {
+  .countdown-container {
     padding-top: 0.875rem;
+    display: flex;
+    flex-direction: row;
+  }
+
+  .view {
+    margin-left: auto;
+    padding-right: 0.65rem;
   }
 </style>
