@@ -41,8 +41,8 @@
     position: absolute;
     height: 33px;
     width: 33px;
-    background: #FB4D42;
-    color: #ffffff;
+    border: 2px solid #FB4D42;
+    color: #FB4D42;
     display: flex;
     justify-content: center;
     align-items: center;
