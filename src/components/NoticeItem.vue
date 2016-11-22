@@ -51,10 +51,6 @@
     font-weight: bold;
   }
 
-  .notice-column span {
-    margin-top: -2px;
-  }
-
   .notice-item.active .notice-date,
   .notice-item.active .notice-time,
   .notice-item.active .notice-location {
