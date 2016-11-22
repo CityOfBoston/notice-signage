@@ -62,7 +62,7 @@
   }
 
   .notice-item-container {
-    padding: 1em 0;
+    padding: 1.125rem 0;
     border-bottom: 1px dashed #d2d2d2;
     display: flex;
     flex-direction: row;
@@ -84,19 +84,19 @@
   .notice-date,
   .notice-time,
   .notice-location {
-    font-size: 1rem;
+    font-size: 14px;
     font-style: italic;
     color: #828282;
   }
 
   .notice-date {
-    font-size: 1.125rem;
     margin-bottom: 0.25rem;
   }
 
   .notice-title {
     font-family: Montserrat;
     margin-bottom: 0.25rem;
+    font-size: 16px;
   }
 
   .notice-oneline,
@@ -104,7 +104,7 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width: 250px;
+    max-width: 270px;
     display: block;
     text-decoration: none;
   }

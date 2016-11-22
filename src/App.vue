@@ -1,10 +1,10 @@
 <template>
   <div id='app' class='app'>
-    <div class='header'>
-      <h1>City Clerk Postings</h1>
-      <LastUpdated :updated="last_updated"></LastUpdated>
-    </div>
     <div class='container'>
+      <div class='header'>
+        <h1>City Clerk Postings</h1>
+        <LastUpdated :updated="last_updated"></LastUpdated>
+      </div>
       <div class="main">
         <div class='columns'>
           <Notice :notice="column_one" :column="one"></Notice>
@@ -13,9 +13,9 @@
         </div>
         <Countdown></Countdown>
       </div>
-      <div class='column sidebar'>
-        <NoticeList :notices="notices" ref="noticeList"></NoticeList>
-      </div>
+    </div>
+    <div class='sidebar'>
+      <NoticeList :notices="notices" ref="noticeList"></NoticeList>
     </div>
   </div>
 </template>
@@ -167,7 +167,7 @@ export default {
 
 <style>
 .app {
-  flex-direction: column;
+  flex-direction: row;
   display: flex;
   height: 100%;
   max-height: 1080px;
@@ -190,16 +190,16 @@ h1 {
 }
 
 .container {
-  flex: 1;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  width: 70%;
 }
 
 .main {
-  width: 70%;
   padding: 1rem;
   display: flex;
   flex-direction: column;
+  flex: 1;
 }
 
 .columns {
