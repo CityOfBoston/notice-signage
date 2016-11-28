@@ -138,7 +138,6 @@ export default {
 
     updateData: function () {
       this.$http.get('https://www.boston.gov/api/v1/public-notices?' + Date.now()).then((response) => {
-      // this.$http.get('http://spyglass.dd:8083/api/v1/public-notices?' + Date.now()).then((response) => {
         // set data on vm
         this.notices = response.body
 
