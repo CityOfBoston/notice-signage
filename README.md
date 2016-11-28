@@ -2,6 +2,8 @@
 
 The source code for the public notice signage for the City of Boston. This is a Vue.js application that takes a JSON feed of public notices and displays them on a sign. 
 
+[![Code Climate](https://codeclimate.com/github/CityOfBoston/notice-signage/badges/gpa.svg)](https://codeclimate.com/github/CityOfBoston/notice-signage)
+
 ## Public domain
 
 This project is in the worldwide [public domain](LICENSE.md). As stated in [LICENSE](LICENSE.md):
