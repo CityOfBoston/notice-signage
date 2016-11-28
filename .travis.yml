@@ -2,5 +2,3 @@ language: node_js
 env: TRAVIS_CI=true
 node_js:
   - "6.0.0"
-before_script:
-  - npm install
