@@ -25,6 +25,7 @@ import Notice from './components/Notice'
 import NoticeList from './components/NoticeList'
 import LastUpdated from './components/LastUpdated'
 import Countdown from './components/Countdown'
+let Pusher = require('pusher-js')
 
 export default {
   name: 'app',
@@ -138,7 +139,6 @@ export default {
 
     updateData: function () {
       this.$http.get('https://www.boston.gov/api/v1/public-notices?' + Date.now()).then((response) => {
-      // this.$http.get('http://spyglass.dd:8083/api/v1/public-notices?' + Date.now()).then((response) => {
         // set data on vm
         this.notices = response.body
 
@@ -149,18 +149,32 @@ export default {
         if (this.initialized !== true) {
           window.kyle.$emit('initialized')
         }
-
-        // Set timer
-        setTimeout(this.updateData, 30000)
-      }, (response) => {
-        setTimeout(this.updateData, 30000)
       })
     }
   },
 
   created: function () {
-    this.updateData()
+    let self = this
+
+    // Update the data
+    self.updateData()
+
+    // Tell the event bus that everything is ready to go
     window.kyle.$on('initialized', this.initialized)
+
+    // Use pusher to subscribe to events
+    self.pusher = new Pusher('165e0e23610763f5ea8d')
+    self.pusherChannel = this.pusher.subscribe('updates')
+
+    // Allow us to remotely refresh the page
+    self.pusherChannel.bind('reload', function (data) {
+      window.location.reload()
+    })
+
+    // Allow us to remotely update the notice list
+    self.pusherChannel.bind('update_notice', function (data) {
+      self.updateData()
+    })
   }
 }
 </script>
