@@ -140,7 +140,7 @@ export default {
     updateData: function () {
       this.$http.get('https://www.boston.gov/api/v1/public-notices?' + Date.now()).then((response) => {
         // set data on vm
-        this.notices = response.body
+        this.notices = response.body.slice(0, 13)
 
         // set the last updated time
         this.last_updated = Date.now()
