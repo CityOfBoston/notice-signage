@@ -52,14 +52,18 @@ export default {
           }, 1000)
         }
       } catch (err) {
-        // Restart the countdown
-        window.setTimeout(function () {
-          // Turn the timer back on
-          self.show_time = true
+        try {
+          // Restart the countdown
+          window.setTimeout(function () {
+            // Turn the timer back on
+            self.show_time = true
 
-          // Start counting
-          self.countdown()
-        }, 1000)
+            // Start counting
+            self.countdown()
+          }, 1000)
+        } catch (err) {
+          window.location.reload()
+        }
       }
     }
   }
