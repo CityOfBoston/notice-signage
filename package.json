@@ -11,9 +11,9 @@
     "e2e": "node test/e2e/runner.js",
     "test": "npm run unit",
     "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs",
-    "postinstall": "npm run build",
+    "postinstall": "NODE_ENV=production npm run build",
     "start": "node server.js"
-  },
+  }, 
   "dependencies": {
     "pusher-js": "^3.2.4",
     "vue": "^2.0.1",
